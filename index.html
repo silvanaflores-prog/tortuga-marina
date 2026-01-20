@@ -5,29 +5,38 @@
     <meta charset="UTF-8">
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <script>
+      // Este pequeño código permite que el sonido funcione en celulares
+      window.addEventListener('click', () => {
+        const audio = document.querySelector("#sonidoTortuga");
+        audio.play();
+        audio.pause(); // Lo "despertamos" para que pueda sonar después
+      });
+    </script>
   </head>
   <body>
     <a-scene 
       mindar-image="imageTargetSrc: ./tortuga.mind;" 
-      renderer="colorManagement: true, exposure: 1.5;" 
+      renderer="colorManagement: true, exposure: 1.2;" 
       vr-mode-ui="enabled: false">
       
       <a-assets>
         <a-asset-item id="modelo" src="./tortuga.glb"></a-asset-item>
+        <audio id="sonidoTortuga" src="./tortuga.mp3" preload="auto"></audio>
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      <a-light type="ambient" intensity="1.5"></a-light>
-      <a-light type="directional" position="1 2 1" intensity="1"></a-light>
-      <a-light type="hemisphere" color="#ffffff" groundColor="#444444" intensity="1.2"></a-light>
+      <a-light type="ambient" intensity="1.2"></a-light>
+      <a-light type="directional" position="1 2 1" intensity="0.8"></a-light>
 
       <a-entity mindar-image-target="targetIndex: 0">
         <a-gltf-model 
            src="#modelo" 
            position="0 0 0.1" 
            scale="1 1 1"
-           rotation="0 0 0">
+           rotation="0 0 0"
+           sound="src: #sonidoTortuga; on: targetFound; loop: true">
         </a-gltf-model>
       </a-entity>
     </a-scene>
