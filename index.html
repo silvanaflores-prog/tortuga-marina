@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
   </head>
@@ -9,20 +10,27 @@
     <a-scene 
       mindar-image="imageTargetSrc: ./tortuga.mind;" 
       color-space="sRGB" 
-      renderer="colorManagement: true, physicallyCorrectLights: true, exposure: 2" 
-      vr-mode-ui="enabled: false">
+      renderer="colorManagement: true, physicallyCorrectLights: true, exposure: 1.2" 
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false">
       
       <a-assets>
-        <a-asset-item id="modelo" src="./tortuga.glb"></a-asset-item>
+        <a-asset-item id="modeloTortuga" src="./tortuga.glb"></a-asset-item>
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      <a-light type="ambient" intensity="2"></a-light>
-      <a-light type="directional" position="1 2 1" intensity="1.5"></a-light>
+      <a-light type="ambient" intensity="1.5" color="#ffffff"></a-light>
+      <a-light type="directional" position="1 2 1" intensity="1.8" castShadow="true"></a-light>
+      <a-light type="hemisphere" intensity="1" groundColor="#666666" color="#ffffff"></a-light>
 
       <a-entity mindar-image-target="targetIndex: 0">
-        <a-gltf-model src="#modelo" position="0 0 0.1" scale="1 1 1" rotation="0 0 0"></a-gltf-model>
+        <a-gltf-model 
+           src="#modeloTortuga" 
+           position="0 0 0.1" 
+           scale="1 1 1" 
+           rotation="0 0 0">
+        </a-gltf-model>
       </a-entity>
     </a-scene>
   </body>
